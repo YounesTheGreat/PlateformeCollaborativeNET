@@ -58,7 +58,7 @@ namespace PlateformeCollaborativeNET_MVC5.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View("Index");
         }
 
         //
