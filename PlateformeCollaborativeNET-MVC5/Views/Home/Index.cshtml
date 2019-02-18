@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+}
+
+@using PlateformeCollaborativeNET_MVC5.Models
+@model LoginViewModel
+
+<!DOCTYPE html>
+<html class="bg-light">
+<head>
+    <title>Solve ComplexProblems - Login</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <style type="text/css">
+        p {
+            font-size: 0.9em;
+        }
+
+        footer > label {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="#"><i class="fas fa-laptop"></i> Solve.Com</a>
+        <div class="ml-auto">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12 p-0 m-0">
+                        <section id="loginForm">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@Html.Raw("@")</span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your email" })
+
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password" })
+
+                                    <button type="submit" class="btn btn-light border">Go</button>
+                                </div>
+                                @* Enable this once you have account confirmation enabled for password reset functionality
+                        <p>
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>*@
+                            }
+                        </section>
+                    </div>
+                    @* <div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div> *@
+                </div>
+
+                <div class="row border-dark border">
+                    <div class="col-12 p-0 m-0">
+                        <div class="checkbox">
+                            @Html.LabelFor(m => m.RememberMe, new { @class = "col-md-2 control-label" })
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                        </div>
+                        <div class="">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        </div>
+                        <div>
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div>
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+
+    <div class="container-fluid bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 pt-3">
+                    <h2>Bienvenue à Solve.com</h2>
+                    <img @*h:src="@{/img/people-meeting.jpg}"*@ class="img-fluid img-thumbnail">
+                    <p class="pt-2">
+                        La première plateforme collaborative gratuite au Maroc. Trouvez la solution de tous vos problèmes ! L'objectif du travail collaboratif est de faciliter la communication entre les individus dans le cadre du travail ou d'une tâche non liée au travail.
+                    </p>
+                </div>
+
+                <div class="col-sm-6 pt-5">
+                    <div class="container">
+                        <h2 class="text-center">Créer un Compte (C'est Gratuit)</h2>
+
+                        <form @*th:action="@{/users}"*@ method="post" class="text-center container">
+                            <hr>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control col-6" name="firstName" placeholder="Prénom" required />
+                                    <input type="text" class="form-control col-6" name="lastName" placeholder="Nom de famille" required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" placeholder="Email" required />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password" id="pwd" placeholder="Nouveau de mot de passe" required />
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox"> J'ai lu et j'accepte <a href="#">les conditions d'utilisation</a>
+                                </label>
+                            </div>
+                            <hr />
+
+                            <input type="submit" class="btn btn-lg btn-dark btn-block w-80" />
+                        </form>
+
+                        @Html.Partial("_AlertMessage")
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <footer class="fixed-bottom pt-6 pb-6 bg-dark text-center">
+        <label class="text-center text-light">&copy; 2018 - Tous les droits réservés ( not yet )</label>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+</body>
+</html> 
