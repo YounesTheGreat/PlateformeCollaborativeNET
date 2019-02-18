@@ -10,7 +10,7 @@ namespace PlateformeCollaborativeNET_MVC5.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View("About");
         }
 
         public ActionResult About()
