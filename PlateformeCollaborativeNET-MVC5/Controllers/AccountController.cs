@@ -139,7 +139,10 @@ namespace PlateformeCollaborativeNET_MVC5.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View("Login");
+            if (Request.IsAjaxRequest())
+                return PartialView("_PartialRegister");
+
+            return View();
         }
 
         //
@@ -147,12 +150,12 @@ namespace PlateformeCollaborativeNET_MVC5.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(Tuple<LoginViewModel,RegisterViewModel> model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            /* if (ModelState.IsValid)
+            if (ModelState.IsValid)
              {
-                 var user = new ApplicationUser { UserName = model.Item2.Email, Email = model.Item2.Email };
-                 var result = await UserManager.CreateAsync(user, model.Item2.Password);
+                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                 var result = await UserManager.CreateAsync(user, model.Password);
                  if (result.Succeeded)
                  {
                      await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -167,10 +170,9 @@ namespace PlateformeCollaborativeNET_MVC5.Controllers
                  }
                  AddErrors(result);
              }
-             */
+             
             // If we got this far, something failed, redisplay form
-            var user = new ApplicationUser { UserName = model.Item2.Email, Email = model.Item2.Email };
-            var result = await UserManager.CreateAsync(user, model.Item2.Password);
+            
             return View("Login");
         }
 

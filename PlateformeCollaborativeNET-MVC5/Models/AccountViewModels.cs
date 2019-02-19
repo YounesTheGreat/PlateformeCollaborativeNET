@@ -71,7 +71,7 @@ namespace PlateformeCollaborativeNET_MVC5.Models
     public class RegisterViewModel
     {
 
-        public RegisterViewModel() { } 
+        
 
         //[Required]
         [Display(Name = "First name")]

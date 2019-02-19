@@ -21,6 +21,7 @@
         footer > label {
             font-size: 0.8em;
         }
+
     </style>
 </head>
 <body>
@@ -76,7 +77,7 @@
                     <h2>Bienvenue à Solve.com</h2>
                     <img src="/Content/Images/people-meeting.jpg" class="img-fluid img-thumbnail">
                     <p class="pt-2">
-                        La première plateforme collaborative gratuite au Maroc. Trouvez la solution de tous vos problèmes ! 
+                        La première plateforme collaborative gratuite au Maroc. Trouvez la solution de tous vos problèmes !
                         L'objectif du travail collaboratif est de faciliter la communication entre les individus dans le cadre du travail ou d'une tâche non liée au travail.
                     </p>
                 </div>
@@ -92,37 +93,13 @@
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger font-weight-bold" })
                     </div>
 
-                    <!-- Register Form -->
-                    @*<div class="container pt-4">
-                        <h2 class="text-center">Créer un Compte (C'est Gratuit)</h2>
-                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {
-                            <hr>
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary("", new { @class = "text-danger" })
-                            <div class="form-group">
-                                <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Item2.FirstName, new { @class = "form-control col-6" , @placeholder="Prénom"})                                      
-                                    @Html.TextBoxFor(m => m.Item2.LastName, new { @class = "form-control col-6", @placeholder = "Nom de famille" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.Item2.Email, new { @class = "form-control", @placeholder = "Email" })
-                            </div>
-                            <div class="input-group">
-                                @Html.PasswordFor(m => m.Item2.Password, new { @class = "form-control", @placeholder = "Nouveau de mot de passe" })
-                                @Html.PasswordFor(m => m.Item2.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirmer le mot de passe" })
-                            </div>
-                            <div class="form-check mt-3">
-                                <label class="form-check-label">
-                                    <input required class="form-check-input" type="checkbox"> J'ai lu et j'accepte <a href="#">les conditions d'utilisation</a>
-                                </label>
-                            </div>
-                            <hr />
+                    <!-- Register form-->
 
-                            <input type="submit" class="btn btn-lg btn-dark btn-block w-80" />
-                        }
-                    </div>*@
+                    <div id="sectionRegister">
+                        @Html.ActionLink("S'enregister", "Register", new { @class = "btn btn-lg btn-dark" })
+                        <button class="btn btn-lg btn-dark" id="registerAjax">S'enregistrer AJAX</button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -131,9 +108,33 @@
         <label class="text-center text-light">&copy; 2018 - Tous les droits réservés</label>
     </footer>
 
+  
 
-    @section Scripts {
+    @section scripts {
         @Scripts.Render("~/bundles/jqueryval")
+
+
     }
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript">
+
+        console.log("Z")
+        //$("button#registerAjax").click(loadRegisterFormAjax);
+
+        loadRegisterFormAjax();
+
+        function loadRegisterFormAjax() {
+            console.log("A")
+            $.get("/Account/Register")
+                .done(appendContentToSectionRegister);
+        }
+
+        function appendContentToSectionRegister(result) {
+            console.log("B")
+            $("div#sectionRegister").html(result);
+        }
+    </script>
+
 </body>
 </html> 
