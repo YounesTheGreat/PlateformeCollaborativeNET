@@ -48,6 +48,12 @@ namespace PlateformeCollaborativeNET_MVC5.Models
 
     public class LoginViewModel
     {
+        
+        public LoginViewModel()
+        {
+
+        }
+
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]
@@ -64,6 +70,18 @@ namespace PlateformeCollaborativeNET_MVC5.Models
 
     public class RegisterViewModel
     {
+
+        public RegisterViewModel() { } 
+
+        //[Required]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+
+        //[Required]
+        //[DataType(DataType.Text)]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; } 
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,6 +97,7 @@ namespace PlateformeCollaborativeNET_MVC5.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+ 
     }
 
     public class ResetPasswordViewModel

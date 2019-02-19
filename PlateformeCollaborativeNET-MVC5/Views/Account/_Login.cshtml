@@ -1,0 +1,21 @@
+﻿@using PlateformeCollaborativeNET_MVC5.Models
+@model LoginViewModel
+
+<section id="loginForm">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.returnUrl }, FormMethod.Post, new { @class = "form-inline", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">@Html.Raw("@")</span>
+            </div>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your email" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password" })
+            <button type="submit" class="btn btn-light border">Go</button>
+        </div>
+        @* Enable this once you have account confirmation enabled for password reset functionality
+            <p>
+                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+            </p>*@
+    }
+</section>
