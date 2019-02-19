@@ -140,8 +140,7 @@ namespace PlateformeCollaborativeNET_MVC5.Controllers
         public ActionResult Register()
         {
             if (Request.IsAjaxRequest())
-                return PartialView("_PartialRegister");
-
+                return PartialView("_PartialRegister");       
             return View();
         }
 
